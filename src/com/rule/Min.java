@@ -18,8 +18,8 @@ public class Min extends Rule {
     @Override
     public String validate(Double value) {
         String error = "";
-        if(value.isNaN() ||value < lowerBound) {
-            error = "Do lon cua gia tri nho hon dieu kien";
+        if(!value.isNaN() && value < lowerBound) {
+            error = "The magnitude of the value must be greater than " + lowerBound;
         }
 
         return error;
@@ -29,7 +29,7 @@ public class Min extends Rule {
     public String validate(String value) {
         String error = "";
         if(value.length()  < lowerBound) {
-            error = "Kich thuoc cua chuoi nho hon dieu kien";
+            error = "The size of the String is less than " + lowerBound + " characters";
         }
 
         return error;

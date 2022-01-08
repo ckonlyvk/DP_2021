@@ -29,9 +29,13 @@ public class CustomPattern extends Rule {
     public String validate(String value) {
         String error = "";
         if(!pattern.matcher(value).find()) {
-            error = "Chuoi khong hop le";
+            error = setErrorMessage();
         }
 
         return error;
+    }
+
+    public String setErrorMessage() {
+        return "String is invalid";
     }
 }

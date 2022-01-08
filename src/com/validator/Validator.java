@@ -33,13 +33,15 @@ public abstract class Validator {
     }
 
 
-    void validate(Object value) {
+    String validate(Object value) {
         Rule temp = head;
-
-        while (temp!=null) {
-            String error = excuteValidate(temp, value);
+        String message = "";
+        while (temp!=null && message.isEmpty()) {
+            message = excuteValidate(temp, value);
             temp = temp.getNext();
         }
+
+        return message;
     }
 
     abstract String excuteValidate(Rule rule, Object value);

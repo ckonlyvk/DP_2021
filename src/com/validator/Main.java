@@ -8,7 +8,8 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
+        //Validate depend on Map
         Map<String, Validator> validators = new HashMap<String, Validator>();
         Validator checkEmail = new StringValidator();
         checkEmail.addRule(new Min(10));
@@ -19,13 +20,22 @@ public class Main {
         checkAge.addRule(new Min(18));
         validators.put("age", checkAge);
 
-        ValidatorSchema schema = new ValidatorSchema(validators);
+
 
         Map<String, Object> form = new HashMap<String, Object>();
-        form.put("email", null);
-        form.put("age", null);
+        form.put("email", "a@gmail.com");
+        form.put("age", 17);
 
-        schema.validate(form);
+        ValidatorSchema schema1 = new ValidatorSchema();
 
+        schema1.validate(form, validators);
+
+        //******************************************************
+        //******************************************************
+        
+        //Validate depend on object
+        ValidatorSchema schema2 = new ValidatorSchema();
+        Form form2 = new Form("a@gmail.com", 9);
+        schema2.validate(form2);
     }
 }

@@ -18,8 +18,8 @@ public class Max extends Rule {
     @Override
     public String validate(Double value) {
         String error = "";
-        if(value.isNaN() ||value > upperBound) {
-            error = "Do lon cua gia tri lon hon dieu kien";
+        if(!value.isNaN() && value > upperBound) {
+            error = "The magnitude of the excess value " + upperBound;
         }
 
         return error;
@@ -29,7 +29,7 @@ public class Max extends Rule {
     public String validate(String value) {
         String error = "";
         if(value.length()  > upperBound) {
-            error = "Kich thuoc cua chuoi lon hon dieu kien";
+            error = "The size of the String exceeds " + upperBound +" characters";
         }
 
         return error;

@@ -5,8 +5,8 @@ public class Required extends Rule {
     @Override
     public String validate(String value) {
         String error = "";
-        if(value.compareTo("") == 0) {
-            error = "Gia tri rong";
+        if(value.isEmpty()) {
+            error = "Is not empty";
         }
 
         return error;
@@ -16,7 +16,7 @@ public class Required extends Rule {
     public String validate(Double value) {
         String error = "";
         if(value.isNaN()) {
-            error = "Gia tri rong";
+            error = "Is not empty";
         }
 
         return error;
