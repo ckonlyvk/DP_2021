@@ -1,5 +1,8 @@
 package com.validator;
 
+import com.notification.ConsoleNotification;
+import com.notification.Notification;
+import com.notification.WindowNotification;
 import com.rule.Min;
 import com.rule.Required;
 import com.rule.Rule;
@@ -24,34 +27,35 @@ public class Main {
 //        };
 //
 //        //Validate depend on Map
-//        Map<String, Validator> validators = new HashMap<String, Validator>();
-//        Validator checkEmail = new StringValidator();
-//        checkEmail.addRule(new Min(10));
-//        checkEmail.addRule(new Required());
-//        checkEmail.addRule(rule);
-//        validators.put("email", checkEmail);
+        Map<String, Validator> validators = new HashMap<String, Validator>();
+        Validator checkEmail = new StringValidator();
+        checkEmail.addRule(new Min(10));
+        checkEmail.addRule(new Required());
+        validators.put("email", checkEmail);
 //
 //
-//        Validator checkAge = new NumericValidator();
-//        checkAge.addRule(new Min(17));
-//        checkAge.addRule(rule);
-//        validators.put("age", checkAge);
+        Validator checkAge = new NumericValidator();
+        checkAge.addRule(new Min(19));
+        validators.put("age", checkAge);
 //
 //
-//        Map<String, Object> form = new HashMap<String, Object>();
-//        form.put("email", "a@gmail.com");
-//        form.put("age", 17);
-//
-//        ValidatorSchema schema1 = new ValidatorSchema();
-//
-//        schema1.validate(form, validators);
+        Map<String, Object> form = new HashMap<String, Object>();
+        form.put("email", "a@gmail.com");
+        form.put("age", 17);
+        
+        
+        Notification notiWindow = new WindowNotification();
+        Notification notiConsole = new ConsoleNotification();
+        ValidatorSchema schema1 = new ValidatorSchema(notiWindow);
+
+        schema1.validate(form, validators);
 
         //******************************************************
         //******************************************************
         
         //Validate depend on object
 
-        ValidatorSchema schema2 = new ValidatorSchema();
+        ValidatorSchema schema2 = new ValidatorSchema(notiWindow);
         Student student = new Student(
            "NguyenVanA",
            "a@gmail.com",
@@ -60,5 +64,7 @@ public class Main {
            12
         );
         schema2.validate(student);
+
+        
     }
 }

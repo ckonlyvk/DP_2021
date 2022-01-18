@@ -1,5 +1,6 @@
 package com.validator;
 
+import com.notification.Notification;
 import com.rule.Rule;
 import com.rule.RuleFactory;
 
@@ -11,6 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ValidatorSchema {
+	private Notification noti;
+	
+	ValidatorSchema(Notification notification)
+	{
+		this.noti = notification;
+	}
 
     //Validate for map
     boolean validate(Map<String, Object> values,
@@ -22,8 +29,10 @@ public class ValidatorSchema {
 
                 //Neu co loi thong bao
                 if(!message.isEmpty()) {
-                    errors.add(new ValidatorError(key, message));
-                    System.out.println(new ValidatorError(key, message));
+                	ValidatorError temp = new ValidatorError(key, message);
+                    errors.add(temp);
+//                    System.out.println(new ValidatorError(key, message));
+                    noti.notify("ERROR", temp.toString());
                 }
             }
         }
@@ -54,8 +63,12 @@ public class ValidatorSchema {
 
             //Neu co loi thong bao
             if(!message.isEmpty()) {
-                errors.add(new ValidatorError(name, message));
-                System.out.println(new ValidatorError(name, message));
+//                errors.add(new ValidatorError(name, message));
+//                System.out.println(new ValidatorError(name, message));
+            	ValidatorError temp = new ValidatorError(name, message);
+                errors.add(temp);
+//                System.out.println(new ValidatorError(key, message));
+                noti.notify("ERROR", temp.toString());
             }
 
         }
