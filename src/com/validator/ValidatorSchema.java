@@ -1,5 +1,6 @@
 package com.validator;
 
+import com.rule.Rule;
 import com.rule.RuleFactory;
 
 import java.lang.annotation.Annotation;
@@ -10,11 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ValidatorSchema {
-//    Map<String, Validator> validators;
-//
-//    public ValidatorSchema(Map<String, Validator> validators) {
-//        this.validators = validators;
-//    }
 
     //Validate for map
     boolean validate(Map<String, Object> values,
@@ -50,7 +46,8 @@ public class ValidatorSchema {
             //Duyet qua cac annotation cua thuoc tinh hien tai
             //Va them cac loai rule tuong ung voi annotation
             for(Annotation annotation : field.getDeclaredAnnotations()) {
-                validator.addRule(RuleFactory.getInstance().getRule(field, annotation));
+                Rule rule = RuleFactory.getInstance().getRule(field, annotation);
+                validator.addRule(rule);
             }
 
             String message = validator.validate(field.get(obj));

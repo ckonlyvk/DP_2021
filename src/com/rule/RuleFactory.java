@@ -46,7 +46,10 @@ public class RuleFactory {
             case "Min":
                 com.annotation.Min min = field.getAnnotation(com.annotation.Min.class);
                 return new Min(min.lowerBound());
-            case "CustomePatter":
+            case "Range":
+                com.annotation.Range range = field.getAnnotation(com.annotation.Range.class);
+                return new Range(range.lowerBound(), range.upperBound());
+            case "CustomPattern":
                 com.annotation.CustomPattern pattern =
                         field.getAnnotation(com.annotation.CustomPattern.class);
                 return new CustomPattern(pattern.regex(), pattern.flags());
@@ -58,6 +61,14 @@ public class RuleFactory {
                 return new IsPhoneNumber();
             case "Required":
                 return new Required();
+            case "IsEven":
+                return new IsEven();
+            case "IsOdd":
+                return new IsEven();
+            case "IsPositive":
+                return new IsPositive();
+            case "IsNegative":
+                return new IsNegative();
         }
         return null;
     }
